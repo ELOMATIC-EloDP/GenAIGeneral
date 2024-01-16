@@ -4,7 +4,7 @@ import Elomatic from "../../assets/Elomatic.png";
 import { CopyRegular, ShareRegular } from "@fluentui/react-icons";
 import { Dialog, Stack, TextField, ICommandBarStyles, IButtonStyles } from "@fluentui/react";
 import { useContext, useEffect, useState } from "react";
-import { HistoryButton, ShareButton } from "../../components/common/Button";
+import { HistoryButton, ShareButton, SharepointButton } from "../../components/common/Button";
 import { AppStateContext } from "../../state/AppProvider";
 import { CosmosDBStatus } from "../../api";
 
@@ -23,6 +23,10 @@ const Layout = () => {
         setCopyClicked(false);
         setCopyText("Copy URL");
     };
+
+    const handleSharepointClick = () => {
+        window.open('https://elsa.elomatic.com/chat', '_blank')?.focus();
+    }
 
     const handleCopyClick = () => {
         navigator.clipboard.writeText(window.location.href);
@@ -59,7 +63,7 @@ const Layout = () => {
                         {(appStateContext?.state.isCosmosDBAvailable?.status !== CosmosDBStatus.NotConfigured) &&
                             <HistoryButton onClick={handleHistoryClick} text={appStateContext?.state?.isChatHistoryOpen ? "Hide chat history" : "Show chat history"} />
                         }
-                        <ShareButton onClick={handleShareClick} />
+                        <SharepointButton onClick={handleSharepointClick} />
                     </Stack>
 
                 </Stack>
